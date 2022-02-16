@@ -1,5 +1,5 @@
 # Web-based rating application
-## Realized by ... and Thomas Bourgeois
+## Realized by Anthony Audoin and Thomas Bourgeois
 [Access to the subject](https://www.unilim.fr/pages_perso/frederic.mora/projet2022/).
 
 The purpose of this application is to simplify the grading of students.
