@@ -1,0 +1,44 @@
+@font-face {
+  font-family: "Georama-Bold";
+  src: local("Georama"),   url('./src/assets/fonts/Georama-Bold.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: "Georama-Semibold";
+  src: local("Georama"),   url('./src/assets/fonts/Georama-SemiBold.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: "Georama-Medium";
+  src: local("Georama"),   url('./src/assets/fonts/Georama-Medium.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: "Georama-Regular";
+  src: local("Georama"),   url('./src/assets/fonts/Georama-Regular.ttf') format("truetype");
+}
+
+:root {
+  --content-primary-color: #0E0E0E;
+  --content-secondary-color: #979797;
+  --content-tertiary-color: #fff;
+  --background-primary-color: #fff;
+  --background-secondary-color: #F1F1F1;
+  --cta-primary-color: #42D392;
+  --cta-danger-color: #D34B42;
+  --border-primary-color: #0E0037;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+body
+{
+  font-family: "Georama-Regular";
+  background-color: var(--background-primary-color);
+}
+

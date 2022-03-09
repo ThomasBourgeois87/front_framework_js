@@ -1,8 +1,9 @@
 <script>
-import Home from './components/Homepage.vue'
-import NewEvaluation from './components/NewEvaluation.vue'
-import NewClass from './components/NewClass.vue'
-import NotFound from './components/NotFound.vue'
+import Home from './components/pages/Homepage.vue'
+import NewEvaluation from './components/pages/NewEvaluation.vue'
+import NewClass from './components/pages/NewClass.vue'
+import NotFound from './components/pages/NotFound.vue'
+import Navbar from "./components/Navbar.vue";
 
 // Routing
 const routes = {
@@ -12,6 +13,7 @@ const routes = {
 }
 
 export default {
+  components: {Navbar},
   data() {
     return {
       currentPath: window.location.hash
@@ -31,9 +33,10 @@ export default {
 </script>
 
 <template>
-  <a href="/">Home</a> |
-  <a href="#/new_evaluation">Nouvelle évaluation</a> |
-  <a href="#/new_class">Nouvelle classe</a> |
-  <a href="#/non-existent-path">Page 404</a>
+  <navbar></navbar>
   <component :is="currentView" />
 </template>
+
+<style>
+@import "./assets/styles/style.scss";
+</style>
