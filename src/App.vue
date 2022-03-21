@@ -7,34 +7,34 @@ import Navbar from "./components/Navbar.vue";
 
 // Routing
 const routes = {
-  '/': Home,
-  '/new_evaluation': NewEvaluation,
-  '/new_class': NewClass,
+    '/': Home,
+    '/new_evaluation': NewEvaluation,
+    '/new_class': NewClass,
 }
 
 export default {
-  components: {Navbar},
-  data() {
-    return {
-      currentPath: window.location.hash
+    components: {Navbar},
+    data() {
+        return {
+            currentPath: window.location.hash
+        }
+    },
+    computed: {
+        currentView() {
+            return routes[this.currentPath.slice(1) || '/'] || NotFound
+        },
+    },
+    mounted() {
+        window.addEventListener('hashchange', () => {
+            this.currentPath = window.location.hash
+        })
     }
-  },
-  computed: {
-    currentView() {
-      return routes[this.currentPath.slice(1) || '/'] || NotFound
-    }
-  },
-  mounted() {
-    window.addEventListener('hashchange', () => {
-      this.currentPath = window.location.hash
-    })
-  }
 }
 </script>
 
 <template>
-  <navbar></navbar>
-  <component :is="currentView" />
+    <navbar></navbar>
+    <component :is="currentView"/>
 </template>
 
 <style>
