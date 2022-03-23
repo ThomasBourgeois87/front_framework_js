@@ -28,8 +28,8 @@ export default {
               color: "primary"
             },
             {
-              name: "Nouvelle classe",
-              url: "#/new_class",
+              name: "Vos classes",
+              url: "#/class",
               icon: "person"
             },
             {
