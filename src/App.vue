@@ -46,7 +46,7 @@ export default {
 
 <template>
     <navbar></navbar>
-    <component @childData="childData($event)" :is="currentView" v-bind:classes="this.classes" v-bind:evaluations="this.evaluations"/>
+    <component class="page" @childData="childData($event)" :is="currentView" v-bind:classes="this.classes" v-bind:evaluations="this.evaluations"/>
 </template>
 
 <style>

@@ -1,15 +1,21 @@
 <template>
-    <div class="">
-        <h1>Gérer les classes</h1>
+    <div>
         <div>
+            <h1>Gérer les classes</h1>
             <h2>Ajouter une classe</h2>
             <form @submit="loadTextFromFile">
-                <input type="text" v-model="name" placeholder="Nom de la classe">
-                <input type="file" accept=".csv" />
-                <input type="submit" value="Créer" @submit="loadTextFromFile">
+                <div>
+                    <label>Nom de la classe</label>
+                    <input required type="text" v-model="name" placeholder="3ème B">
+                </div>
+                <div>
+                    <label for="file">Importer vos élèves</label>
+                    <input id="file" required type="file" accept=".csv"/>
+                </div>
+                <input type="submit" value="Ajouter la classe" @submit.prevent="loadTextFromFile">
             </form>
         </div>
-        <div>
+        <div v-if="classes.length !== 0">
             <h2>Vos classes</h2>
             <div>
                 <ul>
@@ -46,7 +52,6 @@ export default {
     },
     methods: {
         loadTextFromFile(event) {
-            console.log(event);
             let reader = new FileReader();
             reader.onload = async e => {
                 let file = e.target.result;
@@ -69,4 +74,5 @@ export default {
 
 
 <style scoped>
+
 </style>
