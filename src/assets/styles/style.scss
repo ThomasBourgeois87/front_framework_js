@@ -25,6 +25,8 @@
     --background-primary-color: #fff;
     --background-secondary-color: #F1F1F1;
     --cta-primary-color: #42D392;
+    --cta-secondary-color: #2ba5cc;
+    --cta-secondary-color-hover: #2489a9;
     --cta-hover-color: #37b27c;
     --cta-danger-color: #D34B42;
     --border-primary-color: #0E0037;
@@ -100,12 +102,15 @@ input[type="text"]:hover, input[type="submit"]:hover {
 }
 
 input[type="submit"] {
+    display: block;
+    font-family: "Georama-Semibold", sans-serif;
     background-color: var(--cta-primary-color);
     padding: .8em 2em;
     border: solid 2px var(--cta-primary-color);
     color: var(--content-tertiary-color);
     border-radius: 8px;
     font-size: 1rem;
+    cursor: pointer;
     transition: all .2s ease-in-out;
 }
 
@@ -115,6 +120,22 @@ input[type="submit"]:hover {
     transition: all .2s ease-in-out;
 }
 
+.addElementButton {
+    padding: .6em;
+    border: none;
+    font-family: "Georama-Medium", sans-serif;
+    color: var(--content-tertiary-color);
+    border-radius: 8px;
+    background-color: var(--cta-secondary-color);
+    margin-bottom: 2rem;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.addElementButton:hover {
+    background-color: var(--cta-secondary-color-hover);
+    transition: all .2s ease-in-out;
+}
 
 .page {
     padding: 2em 3em 3em 3em;

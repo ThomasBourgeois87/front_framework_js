@@ -24,7 +24,7 @@ export default {
             links:
                 [
                     {
-                        name: "Home",
+                        name: "Accueil",
                         url: "#/",
                         icon: "home",
                         color: "primary"
@@ -35,7 +35,7 @@ export default {
                         icon: "person"
                     },
                     {
-                        name: "Nouvelle Evaluation",
+                        name: "Vos Evaluation",
                         url: "#/new_evaluation",
                         icon: "paper"
                     },

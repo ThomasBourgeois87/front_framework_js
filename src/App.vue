@@ -29,12 +29,16 @@ export default {
         },
     },
     methods: {
-        childData(data) {
+        newClass(data) {
             this.classes.push(data);
-        }
+        },
+        newEval(data) {
+            this.evaluations.push(data);
+        },
     },
     async beforeMount() {
         this.classes = await DB.getAllClasses();
+        this.evaluations = await DB.getAllEvaluations();
     },
     mounted() {
         window.addEventListener('hashchange', () => {
@@ -46,7 +50,7 @@ export default {
 
 <template>
     <navbar></navbar>
-    <component class="page" @childData="childData($event)" :is="currentView" v-bind:classes="this.classes" v-bind:evaluations="this.evaluations"/>
+    <component class="page" @childData="newClass($event)" @newEval="newEval($event)" :is="currentView" v-bind:classes="this.classes" v-bind:evaluations="this.evaluations"/>
 </template>
 
 <style>
