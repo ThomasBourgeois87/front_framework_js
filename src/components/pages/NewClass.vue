@@ -3,7 +3,7 @@
         <div>
             <h1>Gérer les classes</h1>
             <h2>Ajouter une classe</h2>
-            <form @submit="loadTextFromFile">
+            <form @submit.prevent="loadTextFromFile">
                 <div>
                     <label>Nom de la classe</label>
                     <input required type="text" v-model="name" placeholder="3ème B">
@@ -64,7 +64,7 @@ export default {
                     };
                 });
                 let object = await DB.addClass(this.name, this.classesTmp);
-                this.$emit('childData', object);
+                this.$emit('newClasse', object);
             };
             reader.readAsText(event.target[1].files[0]);
         },
