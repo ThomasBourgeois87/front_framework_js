@@ -127,7 +127,7 @@ input[type="submit"]:hover {
     color: var(--content-tertiary-color);
     border-radius: 8px;
     background-color: var(--cta-secondary-color);
-    margin-bottom: 2rem;
+    margin: 1rem 0 2rem 0;
     cursor: pointer;
     transition: all .2s ease-in-out;
 }

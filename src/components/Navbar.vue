@@ -35,7 +35,7 @@ export default {
                         icon: "person"
                     },
                     {
-                        name: "Vos Evaluation",
+                        name: "Vos modèles  d'évaluation",
                         url: "#/new_evaluation",
                         icon: "paper"
                     },
