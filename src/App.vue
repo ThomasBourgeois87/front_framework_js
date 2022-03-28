@@ -23,6 +23,7 @@ export default {
             classes: [],
             evaluations: [],
             classeEvaluation: [],
+            currentClassEvaluationId: "",
         }
 
     },
@@ -41,7 +42,10 @@ export default {
         newClassEvaluation(data) {
             this.classEvaluations.push(data);
         },
-        idEval(data) {
+        newClasseEvaluation(data) {
+            this.classeEvaluation.push(data);
+        },
+        newCurrentClassEvaluationId(data) {
             this.currentClassEvaluationId = data;
         },
     },
@@ -63,12 +67,14 @@ export default {
     <component class="page" @newClasse="newClass($event)"
                @newEval="newEval($event)"
                @newClassEval="newClassEvaluation($event)"
-               @idEval="idEval($event)"
-               @classeEvaluation="classeEvaluation($event)"
+               @newClasseEvaluation="newClasseEvaluation($event)"
+               @newCurrentClassEvaluationId="newCurrentClassEvaluationId($event)"
                :is="currentView"
                v-bind:classes="this.classes"
                v-bind:evaluations="this.evaluations"
-               v-bind:classeEvaluation="this.classeEvaluation" />
+               v-bind:classeEvaluation="this.classeEvaluation"
+               v-bind:currentClassEvaluationId="this.currentClassEvaluationId"
+    />
 </template>
 
 <style>

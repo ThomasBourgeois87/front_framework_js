@@ -74,9 +74,7 @@ export default {
     async associateEvaluationToClasse(classe, criterias) {
         return new Promise((resolve) => {
             this.getAllEvluationsAndClassAssociation()
-                .then(async (classes) => {
-                    console.log(classe)
-                    console.log(criterias)
+                .then(async (allContent) => {
                     let finalObject = {
                         id: this.makeid(),
                         name: classe.className + " - " + criterias.name,
@@ -96,7 +94,9 @@ export default {
                         })
                         finalObject.eval.push(object);
                     });
-                    await localStorage.setItem('classeEvaluation', JSON.stringify(finalObject));
+                    console.log(allContent)
+                    allContent.push(finalObject);
+                    await localStorage.setItem('classeEvaluation', JSON.stringify(allContent));
                     resolve(finalObject);
                 });
         });

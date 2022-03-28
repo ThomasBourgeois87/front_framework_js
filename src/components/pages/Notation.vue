@@ -1,15 +1,17 @@
 <template>
     <div>
         <div>
-            <h1>{{ currentClassEvaluationId }}</h1>
-            {{students.studentName}}
-            <div v-for="student in students.notation" :key="student.criteriaName">
-                {{student.criteriaName}}
-                {{student.value}}
+            <h1>{{ this.classeEvaluation[this.currentClassEvaluationId].name }}</h1>
+            <h3 class="student">{{students.studentName}}</h3>
+            <div v-for="student in students.notation" :key="student.criteriaName" class="crit">
+                <h3>{{student.criteriaName}}</h3>
+                <label>{{student.value}}</label>
                 <input type="range" min="0" max="100" :value="student.value">
             </div>
-            <br><button @click="previousEleve">Élève précédent</button>
-            <button @click="nextEleve">Élève suivant</button>
+            <div>
+                <button v-if="counterStudents > 1" class="btn" @click="previousEleve">Élève précédent</button>
+                <button v-if="counterStudents < this.classeEvaluation[this.currentClassEvaluationId].eval.length" class="btn" @click="nextEleve">Élève suivant</button>
+            </div>
         </div>
     </div>
 </template>
@@ -25,6 +27,11 @@ export default {
             type: String,
             required: true
         },
+        classeEvaluation: {
+            name: "classeEvaluation",
+            type: Array,
+            required: true,
+        }
     },
     data() {
         return {
@@ -33,29 +40,28 @@ export default {
         }
     },
 
+    beforeMount() {
+        this.nextEleve();
+    },
+
     methods: {
         async nextEleve() {
             const allEvluationsAndClassAssociation = await DB.getAllEvluationsAndClassAssociation();
-            if (this.counterStudents >= allEvluationsAndClassAssociation['eval'].length) {
+            if (this.counterStudents >= allEvluationsAndClassAssociation[this.currentClassEvaluationId]['eval'].length) {
                 this.counterStudents = allEvluationsAndClassAssociation['eval'].length - 1;
             } else {
-                console.log(allEvluationsAndClassAssociation['eval'][this.counterStudents]);
-                console.log(this.counterStudents);
                 this.counterStudents++;
-                this.students = allEvluationsAndClassAssociation['eval'][this.counterStudents];
+                this.students = allEvluationsAndClassAssociation[this.currentClassEvaluationId]['eval'][this.counterStudents];
 
             }
         },
         async previousEleve() {
             const allEvluationsAndClassAssociation = await DB.getAllEvluationsAndClassAssociation();
-            console.log(allEvluationsAndClassAssociation);
             if (this.counterStudents <= 0) {
                 this.counterStudents = 0;
             } else {
-                console.log(allEvluationsAndClassAssociation['eval'][this.counterStudents]);
-                console.log(this.counterStudents);
                 --this.counterStudents;
-                this.students = allEvluationsAndClassAssociation['eval'][this.counterStudents];
+                this.students = allEvluationsAndClassAssociation[this.currentClassEvaluationId]['eval'][this.counterStudents];
             }
         },
     },
@@ -64,5 +70,13 @@ export default {
 </script>
 
 <style scoped>
+    .crit {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+    }
 
+    .student {
+        margin-bottom: 2rem;
+    }
 </style>

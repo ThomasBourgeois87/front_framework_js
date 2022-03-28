@@ -12,7 +12,7 @@
                     <label>Critère n° {{ index + 1 }}</label>
                     <input v-model="criteria.name" :name="`criterias[${index}][name]`" type="text" class="form-control"
                            placeholder="Tracer la droite">
-                    <button @click="deleteCriteria(index) ">Supprimer le critère</button>
+                    <button class="btn-terciary" @click="deleteCriteria(index) ">Supprimer le critère</button>
                 </div>
                 <button @click="addCriteria " type="button" class="addElementButton">Ajouter un critère</button>
                 <input type="submit" value="Ajouter l'évaluation">
@@ -82,16 +82,11 @@ export default {
         },
         async associateEvaluationToClasse(data) {
             console.log("exe")
-            // const object = {
-            //     className: this.classes[data.target[0].selectedOptions[0].id].className,
-            //     students: this.classes[data.target[0].selectedOptions[0].id].students,
-            //     criterias: this.evaluations[data.target[1].value]
-            // }
             const classe = this.classes[data.target[0].selectedOptions[0].id].students;
             const criterias = this.evaluations[data.target[1].value].evaluation.criterias;
             const res = await DB.associateEvaluationToClasse(classe, criterias);
             this.$emit('classeEvaluation', res);
-            //window.location.href = "/";
+            window.location.href = "/";
         }
     },
 }

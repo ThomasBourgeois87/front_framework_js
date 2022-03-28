@@ -26,6 +26,8 @@
     --background-secondary-color: #F1F1F1;
     --cta-primary-color: #42D392;
     --cta-secondary-color: #2ba5cc;
+    --cta-terciary-color: #9337e8;
+    --cta-terciary-color-hover: #782db9;
     --cta-secondary-color-hover: #2489a9;
     --cta-hover-color: #37b27c;
     --cta-danger-color: #D34B42;
@@ -120,6 +122,27 @@ input[type="submit"]:hover {
     transition: all .2s ease-in-out;
 }
 
+.btn {
+    display: inline;
+    font-family: "Georama-Semibold", sans-serif;
+    background-color: var(--cta-primary-color);
+    padding: .8em 2em;
+    border: solid 2px var(--cta-primary-color);
+    color: var(--content-tertiary-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-top: 2em;
+    margin-right: 2em;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.btn:hover {
+    background-color: var(--cta-hover-color);
+    color: var(--background-primary-color);
+    transition: all .2s ease-in-out;
+}
+
 .addElementButton {
     padding: .6em;
     border: none;
@@ -137,6 +160,21 @@ input[type="submit"]:hover {
     transition: all .2s ease-in-out;
 }
 
+.btn-terciary {
+    border: none;
+    background-color: var(--background-primary-color);
+    color: var(--cta-terciary-color);
+    padding: .8em;
+    font-family: Georama-Medium;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.btn-terciary:hover {
+    color: var(--cta-terciary-color-hover);
+    transition: all .3s ease-in-out;
+}
+
 .page {
     padding: 2em 3em 3em 3em;
     display: grid;
@@ -145,6 +183,12 @@ input[type="submit"]:hover {
 
 .page > div {
     margin-bottom: 3rem;
+}
+.card {
+    background-color: var(--background-secondary-color);
+    margin-bottom: 2rem;
+    padding: 1em 4em;
+    border-radius: 16px;
 }
 
 @media (min-width: 768px) {
