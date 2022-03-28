@@ -2,7 +2,7 @@
     <div>
         <div>
             <h1>{{ currentClassEvaluationId }}</h1>
-            {{students.firstname}} {{students.lastname}}
+            {{students.studentName}} {{students.notation}}
             <br><button @click="previousEleve">Élève précédent</button>
             <button @click="nextEleve">Élève suivant</button>
         </div>
@@ -26,31 +26,33 @@ export default {
         idEvaluation: this.currentClassEvaluationId,
         idClasse: "",
         students: Array,
-        counterEleve: 0,
+        counterStudents: 0,
         }
     },
 
     methods: {
         async nextEleve() {
-            const allClasse = await DB.getAllClasses();
-            if (this.counterEleve >= allClasse[0]['students'].length) {
-                this.counterEleve = allClasse[0]['students'].length - 1;
+            const allEvluationsAndClassAssociation = await DB.getAllEvluationsAndClassAssociation();
+            if (this.counterStudents >= allEvluationsAndClassAssociation['eval'].length) {
+                this.counterStudents = allEvluationsAndClassAssociation['eval'].length - 1;
             } else {
-                console.log(allClasse[0]['students'][this.counterEleve]);
-                console.log(this.counterEleve);
-                this.students = allClasse[0]['students'][this.counterEleve];
-                this.counterEleve++;
+                console.log(allEvluationsAndClassAssociation['eval'][this.counterStudents]);
+                console.log(this.counterStudents);
+                this.students = allEvluationsAndClassAssociation['eval'][this.counterStudents];
+                this.counterStudents++;
+
             }
         },
         async previousEleve() {
-            const allClasse = await DB.getAllClasses();
-            if (this.counterEleve <= -1) {
-                this.counterEleve = 0;
+            const allEvluationsAndClassAssociation = await DB.getAllEvluationsAndClassAssociation();
+            console.log(allEvluationsAndClassAssociation);
+            if (this.counterStudents <= -1) {
+                this.counterStudents = 0;
             } else {
-                console.log(allClasse[0]['students'][this.counterEleve]);
-                console.log(this.counterEleve);
-                this.students = allClasse[0]['students'][this.counterEleve];
-                this.counterEleve--;
+                console.log(allEvluationsAndClassAssociation['eval'][this.counterStudents]);
+                console.log(this.counterStudents);
+                this.students = allEvluationsAndClassAssociation['eval'][this.counterStudents];
+                this.counterStudents--;
             }
         },
     },
