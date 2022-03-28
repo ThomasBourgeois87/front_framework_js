@@ -2,7 +2,12 @@
     <div>
         <div>
             <h1>{{ currentClassEvaluationId }}</h1>
-            {{students.studentName}} {{students.notation}}
+            {{students.studentName}}
+            <div v-for="student in students.notation" :key="student.criteriaName">
+                {{student.criteriaName}}
+                {{student.value}}
+                <input type="range" min="0" max="100" :value="student.value">
+            </div>
             <br><button @click="previousEleve">Élève précédent</button>
             <button @click="nextEleve">Élève suivant</button>
         </div>
@@ -23,8 +28,6 @@ export default {
     },
     data() {
         return {
-        idEvaluation: this.currentClassEvaluationId,
-        idClasse: "",
         students: Array,
         counterStudents: 0,
         }
@@ -38,21 +41,21 @@ export default {
             } else {
                 console.log(allEvluationsAndClassAssociation['eval'][this.counterStudents]);
                 console.log(this.counterStudents);
-                this.students = allEvluationsAndClassAssociation['eval'][this.counterStudents];
                 this.counterStudents++;
+                this.students = allEvluationsAndClassAssociation['eval'][this.counterStudents];
 
             }
         },
         async previousEleve() {
             const allEvluationsAndClassAssociation = await DB.getAllEvluationsAndClassAssociation();
             console.log(allEvluationsAndClassAssociation);
-            if (this.counterStudents <= -1) {
+            if (this.counterStudents <= 0) {
                 this.counterStudents = 0;
             } else {
                 console.log(allEvluationsAndClassAssociation['eval'][this.counterStudents]);
                 console.log(this.counterStudents);
+                --this.counterStudents;
                 this.students = allEvluationsAndClassAssociation['eval'][this.counterStudents];
-                this.counterStudents--;
             }
         },
     },
