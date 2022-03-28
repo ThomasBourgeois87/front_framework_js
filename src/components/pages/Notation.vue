@@ -2,7 +2,7 @@
     <div>
         <div>
             <h1>{{ currentClassEvaluationId }}</h1>
-            {{students}}
+            {{students.firstname}} {{students.lastname}}
             <br><button @click="previousEleve">Élève précédent</button>
             <button @click="nextEleve">Élève suivant</button>
         </div>
@@ -32,21 +32,27 @@ export default {
 
     methods: {
         async nextEleve() {
-            this.counterEleve++;
-            const res = await DB.getAllClasses();
-            console.log(res[0]['students'][this.counterEleve]);
-            this.students = res[0]['students'][this.counterEleve];
+            const allClasse = await DB.getAllClasses();
+            if (this.counterEleve >= allClasse[0]['students'].length) {
+                this.counterEleve = allClasse[0]['students'].length - 1;
+            } else {
+                console.log(allClasse[0]['students'][this.counterEleve]);
+                console.log(this.counterEleve);
+                this.students = allClasse[0]['students'][this.counterEleve];
+                this.counterEleve++;
+            }
         },
         async previousEleve() {
-            this.counterEleve--;
-            const res = await DB.getAllClasses();
-            console.log(res[0]['students'][this.counterEleve]);
-            this.students = res[0]['students'][this.counterEleve];
+            const allClasse = await DB.getAllClasses();
+            if (this.counterEleve <= -1) {
+                this.counterEleve = 0;
+            } else {
+                console.log(allClasse[0]['students'][this.counterEleve]);
+                console.log(this.counterEleve);
+                this.students = allClasse[0]['students'][this.counterEleve];
+                this.counterEleve--;
+            }
         },
-        eleve() {
-            return this.id + this.counterEleve;
-        },
-
     },
 
 }
