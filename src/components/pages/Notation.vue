@@ -6,7 +6,7 @@
             <div v-for="student in students.notation" :key="student.criteriaName" class="crit">
                 <h3>{{ student.criteriaName }}</h3>
                 <label>{{ student.value }}</label>
-                <input type="range" min="0" max="100" :value="student.value">
+                <input type="range" min="0" max="100" :value="student.value" @change="emitInput">
             </div>
             <div>
                 <button v-if="counterStudents > 1" class="btn" @click="previousEleve">Élève précédent</button>
@@ -37,12 +37,14 @@ export default {
             name: "classeEvaluation",
             type: Array,
             required: true,
-        }
+        },
     },
     data() {
         return {
             students: Array,
             counterStudents: 0,
+            value: 0,
+            defaultvalue: this.students
         }
     },
 
@@ -51,6 +53,13 @@ export default {
     },
 
     methods: {
+        emitInput () {
+            console.log(this.students)
+            // this.value = value
+            // this.input = event.target.value
+            // this.$emit('input', this.input)
+        },
+
         async nextEleve() {
             const allEvluationsAndClassAssociation = await DB.getAllEvluationsAndClassAssociation();
             if (this.counterStudents >= allEvluationsAndClassAssociation[this.currentClassEvaluationId]['eval'].length) {
@@ -70,6 +79,11 @@ export default {
                 this.students = allEvluationsAndClassAssociation[this.currentClassEvaluationId]['eval'][this.counterStudents];
             }
         },
+
+        async updateDB(evaluation){
+            await DB.saveEvaluation(evaluation)
+        },
+
         async finish() {
             console.log("finish");
             const allEvluationsAndClassAssociation = await DB.getAllEvluationsAndClassAssociation();
@@ -77,6 +91,12 @@ export default {
             window.location.href = "/";
         }
     },
+
+    watch: {
+        value (v) {
+            this.input = v
+        }
+    }
 
 }
 </script>

@@ -147,4 +147,26 @@ export default {
 
     },
 
+    async saveAllEvaluation(evaluation) {
+        // eslint-disable-next-line no-async-promise-executor
+        return new Promise((resolve) => {
+            // webstorage save
+            this.getAllEvaluations()
+                .then(async (evaluations) => {
+
+                    if (evaluations === null) {
+                        evaluations = [];
+                    }
+
+                    let object = {
+                        id: this.id,
+                        notation: evaluation
+                    }
+                    evaluations.push(object);
+                    await localStorage.setItem('evaluations', JSON.stringify(evaluations));
+                    resolve(object);
+                });
+        });
+    },
+
 }
