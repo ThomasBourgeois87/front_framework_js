@@ -1,4 +1,6 @@
+import {ExportToCsv} from 'export-to-csv';
 export default {
+
     makeid() {
         var result = '';
         var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -77,7 +79,7 @@ export default {
                 .then(async (allContent) => {
                     let finalObject = {
                         id: this.makeid(),
-                        name: classe.className + " - " + criterias.name,
+                        name: "Evaluation du " + new Date().toLocaleDateString(),
                         eval: [],
                         finish: false
                     };
@@ -109,6 +111,40 @@ export default {
             }
             resolve(JSON.parse(localStorage.getItem("classeEvaluation")));
         });
+    },
+
+    async endEvaluation(id) {
+        return new Promise((resolve) => {
+            this.getAllEvluationsAndClassAssociation()
+                .then(async (allContent) => {
+                    console.log(allContent)
+                    allContent.forEach(element => {
+                        if (element.id === id) {
+                            element.finish = true;
+                        }
+                    });
+                    await localStorage.setItem('classeEvaluation', JSON.stringify(allContent));
+
+                    const options = {
+                        fieldSeparator: ',',
+                        quoteStrings: '"',
+                        decimalSeparator: '.',
+                        showLabels: true,
+                        showTitle: true,
+                        title: 'My Awesome CSV',
+                        useTextFile: false,
+                        useBom: true,
+                        useKeysAsHeaders: true,
+                    };
+
+                    const csvExporter = new ExportToCsv(options);
+
+                    csvExporter.generateCsv(allContent);
+
+                    resolve(allContent);
+                });
+        });
+
     },
 
 }

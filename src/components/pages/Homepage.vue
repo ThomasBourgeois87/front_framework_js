@@ -5,6 +5,8 @@
             <div>
                 <div class="card" v-for="(control, index) in classeEvaluation" :key="control">
                     <h3>{{control.name}}</h3>
+                    <h6 v-if="control.finish === true">Terminé</h6>
+                    <h4 v-if="control.finish === false">Non terminé</h4>
                     <a @click.prevent="goToEvaluation(index)">Aller à la notation</a>
                 </div>
             </div>

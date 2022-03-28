@@ -2,15 +2,20 @@
     <div>
         <div>
             <h1>{{ this.classeEvaluation[this.currentClassEvaluationId].name }}</h1>
-            <h3 class="student">{{students.studentName}}</h3>
+            <h3 class="student">{{ students.studentName }}</h3>
             <div v-for="student in students.notation" :key="student.criteriaName" class="crit">
-                <h3>{{student.criteriaName}}</h3>
-                <label>{{student.value}}</label>
+                <h3>{{ student.criteriaName }}</h3>
+                <label>{{ student.value }}</label>
                 <input type="range" min="0" max="100" :value="student.value">
             </div>
             <div>
                 <button v-if="counterStudents > 1" class="btn" @click="previousEleve">Élève précédent</button>
-                <button v-if="counterStudents < this.classeEvaluation[this.currentClassEvaluationId].eval.length" class="btn" @click="nextEleve">Élève suivant</button>
+                <button v-if="counterStudents < this.classeEvaluation[this.currentClassEvaluationId].eval.length"
+                        class="btn" @click="nextEleve">Élève suivant
+                </button>
+            </div>
+            <div>
+                <button @click="finish" class="btn">Terminer l'évaluation et exporter</button>
             </div>
         </div>
     </div>
@@ -18,6 +23,7 @@
 
 <script>
 import DB from "../../Database.js";
+
 
 export default {
     name: "Notation",
@@ -35,8 +41,8 @@ export default {
     },
     data() {
         return {
-        students: Array,
-        counterStudents: 0,
+            students: Array,
+            counterStudents: 0,
         }
     },
 
@@ -64,19 +70,25 @@ export default {
                 this.students = allEvluationsAndClassAssociation[this.currentClassEvaluationId]['eval'][this.counterStudents];
             }
         },
+        async finish() {
+            console.log("finish");
+            const allEvluationsAndClassAssociation = await DB.getAllEvluationsAndClassAssociation();
+            await DB.endEvaluation(allEvluationsAndClassAssociation[this.currentClassEvaluationId].id);
+            window.location.href = "/";
+        }
     },
 
 }
 </script>
 
 <style scoped>
-    .crit {
-        display: flex;
-        flex-direction: column;
-        justify-content: start;
-    }
+.crit {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
 
-    .student {
-        margin-bottom: 2rem;
-    }
+.student {
+    margin-bottom: 2rem;
+}
 </style>

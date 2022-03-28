@@ -22,8 +22,6 @@
   --background-secondary-color: #F1F1F1;
   --cta-primary-color: #42D392;
   --cta-secondary-color: #2ba5cc;
-  --cta-terciary-color: #9337e8;
-  --cta-terciary-color-hover: #782db9;
   --cta-secondary-color-hover: #2489a9;
   --cta-hover-color: #37b27c;
   --cta-danger-color: #D34B42;
@@ -154,7 +152,7 @@ input[type=submit]:hover {
 .btn-terciary {
   border: none;
   background-color: var(--background-primary-color);
-  color: var(--cta-terciary-color);
+  color: var(--cta-secondary-color);
   padding: 0.8em;
   font-family: Georama-Medium;
   cursor: pointer;
@@ -162,7 +160,7 @@ input[type=submit]:hover {
 }
 
 .btn-terciary:hover {
-  color: var(--cta-terciary-color-hover);
+  color: var(--cta-secondary-color-hover);
   transition: all 0.3s ease-in-out;
 }
 
@@ -181,6 +179,7 @@ input[type=submit]:hover {
   margin-bottom: 2rem;
   padding: 1em 4em;
   border-radius: 16px;
+  cursor: pointer;
 }
 
 @media (min-width: 768px) {
